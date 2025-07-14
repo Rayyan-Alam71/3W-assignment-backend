@@ -1,9 +1,12 @@
 import express from 'express'
 import cors from 'cors'
 import {  connectDB } from './db/index.js'
-import { User } from './db/models.js'
 import { router as userRouter} from './routes/user.js'
+import dotenv from 'dotenv'
 
+dotenv.config()
+
+const PORT = process.env.PORT || 8080
 connectDB()
 
 const app = express()
@@ -13,6 +16,6 @@ app.use(express.json())
 
 app.use('/api/v1/', userRouter)
 
-app.listen(3000 ,()=>{
-    console.log("Server running on port 3000")
+app.listen(PORT ,()=>{
+    console.log("Server running on port "+PORT)
 })
