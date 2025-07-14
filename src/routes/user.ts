@@ -62,3 +62,28 @@ router.post('/claimPoints',async (req, res)=>{
     }
 })
 
+router.post('/addUser' , async (req, res)=>{
+    const { username } = req.body;
+    try{
+        // check if the user already exist
+        const userExisted = await User.findOne({
+            username : username
+        })
+
+        if(userExisted) {
+            return res.status(200).send('user already exist')
+        }
+
+        // if not, then add the user
+        const user = await User.create({
+            username : username
+        })
+        return res.status(200).json({
+            msg : 'User created successfully'
+        })
+    }catch(e){
+        return res.status(500).json({
+            msg : 'Error occurred while adding user'
+        })
+    }
+})
