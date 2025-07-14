@@ -1,6 +1,8 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose, { mongo, Schema } from "mongoose";
+import { ClaimPointsHistorySchemaType, UserSchemaType } from "../types/index.js";
 
-const UserSchema =   new mongoose.Schema({
+
+const UserSchema : Schema<UserSchemaType>=   new mongoose.Schema({
     username : String,
     points : {
         type : Number,
@@ -8,7 +10,7 @@ const UserSchema =   new mongoose.Schema({
     }
 })
 
-const ClaimPointsHistorySchema = new mongoose.Schema({
+const ClaimPointsHistorySchema : Schema<ClaimPointsHistorySchemaType> = new mongoose.Schema({
     userId : {
         type : mongoose.Schema.Types.ObjectId,
         ref : "User"

@@ -14,6 +14,7 @@ router.get('/', async (req, res)=>{
 router.get('/users', async (req , res) =>{
     
     try{
+        // .sort() sorts the users in descending order based on their points
         const userList = await User.find({}).sort({points: -1})
         return res.status(200).json({
             users : userList
